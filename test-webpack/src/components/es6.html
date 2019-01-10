@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function* sayHello() {
+        var firstName = yield getFirstName();
+        var secondName = yield getSecondName();
+        console.log('firstName',firstName);
+        console.log('secondName',secondName);
+    }
+
+    function getFirstName() {
+        setTimeout(function () {
+            gen.next('deng')
+        },2000)
+    }
+
+    function getSecondName() {
+        setTimeout(function () {
+            gen.next('li')
+        },1000)
+    }
+
+    var gen = sayHello();
+//    console.log(gen.next());
+    async function sayHello2() {
+        var first = await new Promise(resolve =>{
+            setTimeout(function () {
+                resolve('deng')
+            },2000)
+        });
+        var second =await new Promise(resolve =>{
+            setTimeout(function () {
+                resolve('li')
+            },1000)
+        });
+        console.log(first);
+        console.log(second);
+        console.log(1);
+    }
+    sayHello2();
+</script>
+</body>
+</html>

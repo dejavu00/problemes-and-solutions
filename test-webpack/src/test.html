@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="../node_modules/intro.js/introjs.css" rel="stylesheet">
+</head>
+<body>
+<button onclick="start()"> show me</button>
+<div data-step='1' data-intro="First">
+   第一步
+</div>
+<div data-step='3' data-intro="last">
+    <form>
+        <fieldset>
+            <legend>health information</legend>
+            height: <input type="text" />
+            weight: <input type="text" />
+        </fieldset>
+    </form>
+</div>
+<div data-step='2' data-intro="second">
+    The <abbr title="People's Republic of China">PRC</abbr> was founded in 1949.
+</div>
+
+<script src="../node_modules/intro.js/intro.js">
+
+</script>
+<script>
+    function start() {
+        console.log(introJs);
+        introJs().setOptions(
+            {
+                'prevLabel': '← 上一步',
+                'nextLabel': '下一步 →',
+                'skipLabel': '跳过',
+                'doneLabel': '完成',
+                'showBullets': false,//隐藏直接跳转按钮(
+            }
+        ).start().onexit(function() {//非常规退出
+            console.log('onexit');
+        }).oncomplete(function() {//正常完成
+            console.log('oncomplete');
+        }).onchange(function(obj) {//已完成当前一步
+            console.log(obj);
+            console.log('onchange');
+            $(obj).show();//显示当前
+        });
+    }
+</script>
+</body>
+</html>
